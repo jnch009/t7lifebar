@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - t7lifebar",
+            "request": "launch",
+            "mainClass": "t7lifebar"
+        }
+    ]
+}
