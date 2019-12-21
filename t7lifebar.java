@@ -1,5 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import javafx.geometry.Point2D;
+
 import java.awt.Polygon;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -57,12 +60,13 @@ public class t7lifebar extends JPanel{
 
         g.setColor(Color.blue);
         Polygon lifeBar = new Polygon();
-        lifeBar.addPoint(100,200);
-        lifeBar.addPoint(100,150);
-        lifeBar.addPoint(650,150);
-        lifeBar.addPoint(650,200);
-        g.drawPolygon(lifeBar);
+        Point2D p1 = new Point2D(100, 200);
 
+        // lifeBar.addPoint(100,200);
+        // lifeBar.addPoint(100,150);
+        // lifeBar.addPoint(650,150);
+        // lifeBar.addPoint(650,200);
+        // g.drawPolygon(lifeBar);
         // start.getRed()
 
 
