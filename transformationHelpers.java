@@ -5,5 +5,9 @@ public class transformationHelpers {
         double y = toShear.getX()*ty + toShear.getY()*1;
         return new Point2D(x,y);
     }
+
+    public double calculateSlope(double x1, double x2, double y1, double y2){
+        return ((y1-y2)/(x1-x2));
+    }
     
 }
