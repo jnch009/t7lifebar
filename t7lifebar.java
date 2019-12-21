@@ -48,10 +48,10 @@ public class t7lifebar extends JPanel{
         BufferedImage bufferedImage = new BufferedImage(800,800,BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bufferedImage.createGraphics();
 
-        //yellow
-        Color start = new Color(255,255,0);
-        //orange
-        Color end = new Color(255,165,0);
+        //gold
+        Color start = new Color(255,215,0);
+        //teal
+        Color end = new Color(32,178,170);
 
 
         g.setColor(Color.white);
@@ -85,9 +85,9 @@ public class t7lifebar extends JPanel{
         for (int j = 150; j <= 200; j++){
             int startX = (int)(-(j-intercept)/slope);
             int endX = (int)(startX + 500);
-            for (int i = startX; i <= endX; i++){
+            for (int i = startX; i < endX; i++){
                 if (i > 0){
-                    float t = (float)i / 550;
+                    float t = (float)(i-startX) / endX;
                     // TODO: refactor the following into a method
                     int currentColorR = (int)Math.round(start.getRed() + (end.getRed() - start.getRed()) * t);
                     int currentColorB = (int)Math.round(start.getBlue() + (end.getBlue() - start.getBlue()) * t);
@@ -101,6 +101,8 @@ public class t7lifebar extends JPanel{
         g.drawPolygon(lifeBar);
         return bufferedImage;
      }
+
+
 
 
     public static void main(String[] args){
