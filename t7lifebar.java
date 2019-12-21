@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import java.awt.Polygon;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,20 +13,49 @@ public class t7lifebar extends JPanel{
     public void paint(Graphics g) {
         Image img = createLifeBar();
         g.drawImage(img, 100,200,this);
+        Image img2 = createLifeBarWithShear();
+        g.drawImage(img2, 0,0,this);
      }
 
      private Image createLifeBar(){
         BufferedImage bufferedImage = new BufferedImage(550,50,BufferedImage.TYPE_INT_RGB);
-        AffineTransform transform = new AffineTransform();
-        transform.shear(0.30, 0);
-        AffineTransformOp transformOp = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-        bufferedImage = transformOp.filter(bufferedImage, null);
+        Graphics g = bufferedImage.getGraphics();
+        //yellow
+        Color start = new Color(255,255,0);
+        //orange
+        Color end = new Color(255,165,0);
+        g.setColor(start);
+        for (int j = 0; j <= 50; j++){
+            for (int i = 0; i <= 550; i++){
+                if (i > 0){
+                    float t = (float)i / 550;
+                    // TODO: refactor the following into a method
+                    int currentColorR = (int)Math.round(start.getRed() + (end.getRed() - start.getRed()) * t);
+                    int currentColorB = (int)Math.round(start.getBlue() + (end.getBlue() - start.getBlue()) * t);
+                    int currentColorG = (int)Math.round(start.getGreen() + (end.getGreen() - start.getGreen()) * t);
+                    g.setColor(new Color(currentColorR,currentColorG,currentColorB));
+                }
+                g.drawLine(i, j, i, j);
+            }
+        }
+        return bufferedImage;
+     }
+
+     private Image createLifeBarWithShear(){
+        BufferedImage bufferedImage = new BufferedImage(800,800,BufferedImage.TYPE_INT_RGB);
         Graphics g = bufferedImage.getGraphics();
 
         //yellow
         Color start = new Color(255,255,0);
         //orange
         Color end = new Color(255,165,0);
+
+        Polygon lifeBar = new Polygon();
+        lifeBar.addPoint(100,100);
+        lifeBar.addPoint(200,200);
+        lifeBar.addPoint(300,100);
+
+        g.drawPolygon(lifeBar);
 
         // start.getRed()
 
@@ -35,7 +64,7 @@ public class t7lifebar extends JPanel{
         // END GOAL is to do bilinear interpolation, focus on 1 dimension first
         // formula is: c = a + (b-a)*t
 
-        // g.setColor(start);
+        //g.setColor(Color.RED);
         
         // for (int j = 0; j <= 50; j++){
         //     for (int i = 0; i <= 550; i++){
