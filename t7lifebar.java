@@ -50,12 +50,16 @@ public class t7lifebar extends JPanel{
         //orange
         Color end = new Color(255,165,0);
 
-        Polygon lifeBar = new Polygon();
-        lifeBar.addPoint(100,100);
-        lifeBar.addPoint(200,200);
-        lifeBar.addPoint(300,100);
 
-        g.drawPolygon(lifeBar);
+        g.setColor(Color.white);
+        g.fillRect(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
+
+        // Polygon lifeBar = new Polygon();
+        // lifeBar.addPoint(100,100);
+        // lifeBar.addPoint(200,200);
+        // lifeBar.addPoint(300,100);
+
+        // g.drawPolygon(lifeBar);
 
         // start.getRed()
 
