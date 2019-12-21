@@ -59,9 +59,19 @@ public class t7lifebar extends JPanel{
 
         g.setColor(Color.blue);
         Polygon lifeBar = new Polygon();
-        Point2D p1 = new Point2D(100, 200);
+        // Point2D p1 = new Point2D(100, 200);
         transformationHelpers tH = new transformationHelpers();
-        p1 = tH.applyShear(p1, 0.3, 0);
+        Point2D[] pts = {new Point2D(125, 150),new Point2D(125, 200),new Point2D(625, 200),new Point2D(625, 150)};
+        // applying shearing to the top points only
+        int[] indicesTop = {0,3};
+        for (int i : indicesTop){
+            pts[i] = tH.applyShear(pts[i], 0.3, 0);
+        }
+
+        for (int i = 0; i < pts.length; i++){
+            lifeBar.addPoint((int)pts[i].getX(),(int)pts[i].getY());
+        }
+            
         // lifeBar.addPoint(100,200);
         // lifeBar.addPoint(100,150);
         // lifeBar.addPoint(650,150);
