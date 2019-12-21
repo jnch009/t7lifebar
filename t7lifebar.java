@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Polygon;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -43,7 +44,7 @@ public class t7lifebar extends JPanel{
 
      private Image createLifeBarWithShear(){
         BufferedImage bufferedImage = new BufferedImage(800,800,BufferedImage.TYPE_INT_RGB);
-        Graphics g = bufferedImage.getGraphics();
+        Graphics2D g = bufferedImage.createGraphics();
 
         //yellow
         Color start = new Color(255,255,0);
@@ -54,12 +55,13 @@ public class t7lifebar extends JPanel{
         g.setColor(Color.white);
         g.fillRect(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
 
-        // Polygon lifeBar = new Polygon();
-        // lifeBar.addPoint(100,100);
-        // lifeBar.addPoint(200,200);
-        // lifeBar.addPoint(300,100);
-
-        // g.drawPolygon(lifeBar);
+        g.setColor(Color.blue);
+        Polygon lifeBar = new Polygon();
+        lifeBar.addPoint(100,200);
+        lifeBar.addPoint(100,150);
+        lifeBar.addPoint(650,150);
+        lifeBar.addPoint(650,200);
+        g.drawPolygon(lifeBar);
 
         // start.getRed()
 
