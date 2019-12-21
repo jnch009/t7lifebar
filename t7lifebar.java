@@ -87,12 +87,7 @@ public class t7lifebar extends JPanel{
             int endX = (int)(startX + 500);
             for (int i = startX; i < endX; i++){
                 if (i > 0){
-                    float t = (float)(i-startX) / endX;
-                    // TODO: refactor the following into a method
-                    int currentColorR = (int)Math.round(start.getRed() + (end.getRed() - start.getRed()) * t);
-                    int currentColorB = (int)Math.round(start.getBlue() + (end.getBlue() - start.getBlue()) * t);
-                    int currentColorG = (int)Math.round(start.getGreen() + (end.getGreen() - start.getGreen()) * t);
-                    g.setColor(new Color(currentColorR,currentColorG,currentColorB));
+                    g.setColor(applyLinearInterpolation(start,end,startX,endX,i));
                 }
                 g.drawLine(i, j, i, j);
             }
@@ -102,7 +97,17 @@ public class t7lifebar extends JPanel{
         return bufferedImage;
      }
 
+    private int interpolationFormula(int startColor, int endColor, float t){
+        return (int)Math.round(startColor + (endColor-startColor) * t);
+    }
 
+    private Color applyLinearInterpolation(Color start, Color end, int startX, int endX, int i){
+        float t = (float)(i-startX) / endX;
+        int currentColorR = interpolationFormula(start.getRed(),end.getRed(),t);
+        int currentColorB = interpolationFormula(start.getBlue(),end.getBlue(),t);
+        int currentColorG = interpolationFormula(start.getGreen(),end.getGreen(),t);
+        return new Color(currentColorR,currentColorG,currentColorB);
+    } 
 
 
     public static void main(String[] args){
