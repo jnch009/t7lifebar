@@ -73,7 +73,8 @@ public class t7lifebar extends JPanel{
         }
         // start.getRed()
 
-        double slope = tH.calculateSlope(pts[0].getX(), pts[1].getX(), pts[0].getY(), pts[1].getY());
+        double slope = -(tH.calculateSlope(pts[0].getX(), pts[1].getX(), pts[0].getY(), pts[1].getY()));
+        double intercept = pts[0].getY() + (pts[0].getX()*slope);
 
         // TODO: interpolate from yellow to orange 
         // END GOAL is to do bilinear interpolation, focus on 1 dimension first
@@ -81,8 +82,10 @@ public class t7lifebar extends JPanel{
 
         g.setColor(start);
         
-        for (int j = 0; j <= 50; j++){
-            for (int i = 0; i <= 550; i++){
+        for (int j = 150; j <= 200; j++){
+            int startX = (int)(-(j-intercept)/slope);
+            int endX = (int)(startX + 500);
+            for (int i = startX; i <= endX; i++){
                 if (i > 0){
                     float t = (float)i / 550;
                     // TODO: refactor the following into a method
